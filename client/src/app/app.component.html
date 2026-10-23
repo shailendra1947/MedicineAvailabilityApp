@@ -1,0 +1,52 @@
+<div class="app-shell">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Globaly Pharmacy</p>
+      <h1>Medicine Availability</h1>
+    </div>
+    <div class="legend">
+      <span class="legend-item expiring">Expires in under 30 days</span>
+      <span class="legend-item low-stock">Quantity below 10</span>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Application sections">
+    <button class="tab" [class.active]="tab === 'inventory'" type="button" (click)="tab = 'inventory'">
+      Inventory
+    </button>
+    <button class="tab" [class.active]="tab === 'add'" type="button" (click)="tab = 'add'">
+      Add Medicine
+    </button>
+    <button class="tab" [class.active]="tab === 'sales'" type="button" (click)="tab = 'sales'">
+      Sale Records
+    </button>
+  </nav>
+
+  @if (notice) {
+    <div class="banner success" role="status">
+      {{ notice }}
+      <button type="button" (click)="notice = ''" aria-label="Dismiss">×</button>
+    </div>
+  }
+  @if (error) {
+    <div class="banner error" role="alert">{{ error }}</div>
+  }
+
+  @if (tab === 'inventory') {
+    <app-medicine-grid
+      [medicines]="medicines"
+      [loading]="loading"
+      [search]="search"
+      (searchChange)="onSearchChange($event)"
+      (refresh)="load()"
+    />
+  }
+
+  @if (tab === 'add') {
+    <app-add-medicine-form [submitMedicine]="addMedicine" />
+  }
+
+  @if (tab === 'sales') {
+    <app-sales-panel [medicines]="medicines" [sales]="sales" [submitSale]="recordSale" />
+  }
+</div>

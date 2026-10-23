@@ -1,0 +1,69 @@
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <h2>Available medicines</h2>
+      <p>Notes are kept on the add form and are not shown in this grid.</p>
+    </div>
+    <div class="toolbar">
+      <input
+        type="search"
+        placeholder="Search by medicine name or brand"
+        [value]="search"
+        (input)="onSearchInput($event)"
+        aria-label="Search medicines"
+      />
+      <button type="button" class="secondary" (click)="refresh.emit()">Refresh</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Medicine</th>
+          <th>Brand</th>
+          <th>Expiry date</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (loading) {
+          <tr>
+            <td colspan="6" class="muted">Loading inventory…</td>
+          </tr>
+        } @else if (medicines.length === 0) {
+          <tr>
+            <td colspan="6" class="muted">No medicines match this search.</td>
+          </tr>
+        } @else {
+          @for (medicine of medicines; track medicine.id) {
+            <tr [class]="rowClass(medicine)">
+              <td>{{ medicine.fullName }}</td>
+              <td>{{ medicine.brand }}</td>
+              <td>{{ formatDate(medicine.expiryDate) }}</td>
+              <td>{{ medicine.quantity }}</td>
+              <td>₹ {{ formatCurrency(medicine.price) }}</td>
+              <td>
+                <div class="chips">
+                  @if (isExpiringSoon(medicine.expiryDate)) {
+                    <span class="chip red">
+                      {{ daysUntilExpiry(medicine.expiryDate) < 0 ? 'Expired' : 'Expires in ' + daysUntilExpiry(medicine.expiryDate) + ' day(s)' }}
+                    </span>
+                  }
+                  @if (isLowStock(medicine.quantity)) {
+                    <span class="chip yellow">Low stock</span>
+                  }
+                  @if (!isExpiringSoon(medicine.expiryDate) && !isLowStock(medicine.quantity)) {
+                    <span class="chip green">In stock</span>
+                  }
+                </div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "084f8fae-a491-43e3-be95-a7f4b89438b4",
+    "medicineId": "ab01daca-007e-43e7-b4bc-9331a91d7ac9",
+    "medicineName": "Ostroclacium",
+    "brand": "Piramal",
+    "quantity": 20,
+    "unitPrice": 100,
+    "totalAmount": 2000,
+    "soldAt": "2026-10-22T10:25:48.991653Z"
+  },
+  {
+    "id": "07737356-b595-450e-a214-dda69e9357cc",
+    "medicineId": "2dce6a7e-d0e6-42db-8335-73462f3d5392",
+    "medicineName": "Vitamin D3 60K",
+    "brand": "Uprise",
+    "quantity": 2,
+    "unitPrice": 34.5,
+    "totalAmount": 69.0,
+    "soldAt": "2026-10-22T09:54:14.5937928Z"
+  }
+]

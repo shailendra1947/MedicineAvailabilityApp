@@ -1,0 +1,43 @@
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <h2>Add medicine details</h2>
+      <p>New stock is stored in JSON on the server and appears in the inventory grid.</p>
+    </div>
+  </div>
+
+  <form class="form-grid" (ngSubmit)="onSubmit()">
+    <label>
+      Full name of the medicine
+      <input required name="fullName" [(ngModel)]="form.fullName" placeholder="e.g. Paracetamol 500mg" />
+    </label>
+    <label>
+      Brand
+      <input required name="brand" [(ngModel)]="form.brand" placeholder="e.g. Crocin" />
+    </label>
+    <label>
+      Expiry date
+      <input required type="date" name="expiryDate" [(ngModel)]="form.expiryDate" />
+    </label>
+    <label>
+      Quantity
+      <input required type="number" min="0" step="1" name="quantity" [(ngModel)]="form.quantity" />
+    </label>
+    <label>
+      Price (2 decimal places)
+      <input required type="number" min="0" step="0.01" name="price" [(ngModel)]="form.price" />
+    </label>
+    <label class="full">
+      Notes
+      <textarea rows="3" name="notes" [(ngModel)]="form.notes" placeholder="Storage, dosage, or other internal notes"></textarea>
+    </label>
+
+    @if (error) {
+      <p class="form-error">{{ error }}</p>
+    }
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="saving">{{ saving ? 'Saving…' : 'Save medicine' }}</button>
+    </div>
+  </form>
+</section>

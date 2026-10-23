@@ -1,0 +1,80 @@
+<div class="sales-layout">
+  <section class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Record a sale</h2>
+        <p>Quantity is deducted from inventory when a sale is saved.</p>
+      </div>
+    </div>
+    <form class="form-grid compact" (ngSubmit)="onSubmit()">
+      <label class="full">
+        Medicine
+        <select required name="medicineId" [(ngModel)]="medicineId">
+          <option value="">Select a medicine</option>
+          @for (medicine of medicines; track medicine.id) {
+            <option [value]="medicine.id">
+              {{ medicine.fullName }} ({{ medicine.brand }}) — {{ medicine.quantity }} in stock
+            </option>
+          }
+        </select>
+      </label>
+      <label>
+        Quantity
+        <input required type="number" min="1" step="1" name="quantity" [(ngModel)]="quantity" />
+      </label>
+      <label>
+        Unit price
+        <input readonly [value]="unitPriceLabel" />
+      </label>
+      @if (error) {
+        <p class="form-error">{{ error }}</p>
+      }
+      <div class="form-actions">
+        <button type="submit" [disabled]="saving || !medicineId">
+          {{ saving ? 'Recording…' : 'Record sale' }}
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Sale history</h2>
+        <p>{{ sales.length }} recorded transaction(s).</p>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Sold at</th>
+            <th>Medicine</th>
+            <th>Brand</th>
+            <th>Qty</th>
+            <th>Unit price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (sales.length === 0) {
+            <tr>
+              <td colspan="6" class="muted">No sales recorded yet.</td>
+            </tr>
+          } @else {
+            @for (sale of sales; track sale.id) {
+              <tr>
+                <td>{{ formatDateTime(sale.soldAt) }}</td>
+                <td>{{ sale.medicineName }}</td>
+                <td>{{ sale.brand }}</td>
+                <td>{{ sale.quantity }}</td>
+                <td>₹ {{ formatCurrency(sale.unitPrice) }}</td>
+                <td>₹ {{ formatCurrency(sale.totalAmount) }}</td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
