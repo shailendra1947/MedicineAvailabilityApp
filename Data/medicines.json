@@ -61,5 +61,14 @@
     "quantity": 100,
     "price": 100,
     "brand": "Piramal"
+  },
+  {
+    "id": "045c5cf4-5ff2-4220-b861-ae4e1d7f4f6e",
+    "fullName": "Disprin",
+    "notes": "Sleeping Dose.",
+    "expiryDate": "2026-10-31",
+    "quantity": 40,
+    "price": 30,
+    "brand": "Torrent Pharma"
   }
 ]
