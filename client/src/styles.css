@@ -181,6 +181,12 @@ label textarea {
   overflow-x: auto;
 }
 
+.grid-note {
+  margin: 12px 0 0;
+  color: #6a847d;
+  font-size: 13px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

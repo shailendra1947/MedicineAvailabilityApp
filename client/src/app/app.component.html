@@ -1,7 +1,7 @@
 <div class="app-shell">
   <header class="hero">
     <div>
-      <p class="eyebrow">Globaly Pharmacy</p>
+      <p class="eyebrow">E-Global Pharmacy</p>
       <h1>Medicine Availability</h1>
     </div>
     <div class="legend">
@@ -18,7 +18,7 @@
       Add Medicine
     </button>
     <button class="tab" [class.active]="tab === 'sales'" type="button" (click)="tab = 'sales'">
-      Sale Records
+      Sales Record
     </button>
   </nav>
 
@@ -33,13 +33,7 @@
   }
 
   @if (tab === 'inventory') {
-    <app-medicine-grid
-      [medicines]="medicines"
-      [loading]="loading"
-      [search]="search"
-      (searchChange)="onSearchChange($event)"
-      (refresh)="load()"
-    />
+    <app-medicine-grid [medicines]="medicines" [loading]="loading" [search]="search" (searchChange)="onSearchChange($event)" (refresh)="load()"/>
   }
 
   @if (tab === 'add') {
